@@ -43,7 +43,7 @@ class Graph {
   }
   public params(variablesData: any): AxiosPromise<void> {
     return axios.post(
-      '/graphql',
+      `${process.env.VUE_APP_SERVER_HOST}/graphql`,
       {
         query: query[this.queryData],
         variables: variablesData,

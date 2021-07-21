@@ -35,4 +35,17 @@ limitations under the License. -->
     flex-direction: column;
     justify-content: space-between;
   }
+
+  .rk-dashboard-sel,
+  .rk-topo-sel,
+  .rk-common-sel {
+    min-width: 320px;
+    width: auto !important;
+  }
+  .rk-dashboard-opt-wrapper,
+  .rk-topo-opt-wrapper,
+  .rk-common-opt-wrapper {
+    max-height: 75vh !important;
+    width: auto !important;
+  }
 </style>

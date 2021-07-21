@@ -14,16 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var env_nginx_path = (function() {
+  var name = process.env.VUE_APP_NGINX_VPATH_NAME || '';
+  if (!name.startsWith('/')) {
+    name = '/' + name;
+  }
+  if (!name.endsWith('/')) {
+    name = name + '/';
+  }
+  return name;
+})();
+
+var proxyPath = `/graphql`;
+var proxy = {};
+proxy[proxyPath] = {
+  target: `${process.env.SW_PROXY_TARGET || 'http://127.0.0.1:12800'}`,
+  changeOrigin: true,
+  pathRewrite: {},
+};
+
+proxy[proxyPath].pathRewrite['^' + env_nginx_path] = '/';
 
 module.exports = {
+  publicPath: env_nginx_path,
   productionSourceMap: process.env.NODE_ENV !== 'production',
   devServer: {
-    proxy: {
-      '/graphql': {
-        target: `${process.env.SW_PROXY_TARGET || 'http://127.0.0.1:12800'}`,
-        changeOrigin: true,
-      },
-    },
+    // proxy: proxy,
   },
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');

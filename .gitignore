@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 node
 yarn.lock
-.env*
 
 # Editor directories and files
 .idea
